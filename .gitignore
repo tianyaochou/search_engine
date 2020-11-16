@@ -1,0 +1,15 @@
+# python
+/bin
+/include
+/lib
+pyvenv.cfg
+__pycache__
+
+# nltk
+nltk_data
+
+# redis
+*.rdb
+
+# mail dataset
+maildir
