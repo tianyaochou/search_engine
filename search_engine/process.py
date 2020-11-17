@@ -58,8 +58,8 @@ def getfileid(filepath):
         return int(id)
     else:
         fileid = r.incr("fileid")
-        r.set("file:{}.id".format(filepath), fileid)
-        r.set("file:{}.path".format(fileid), filepath)
+        r.set("file:{}".format(filepath), fileid)
+        r.set("file:{}".format(fileid), filepath)
         return int(fileid)
 
 
@@ -75,6 +75,8 @@ def reverse_index_email(entry):
         tokenid = gettokenid(token)
         # idx[tokenid] = fileid
         pipeline.sadd("idx:{}".format(tokenid), fileid)
+        pipeline.incr("tf:{}:{}".format(tokenid, fileid))
+        pipeline.incr("df:{}".format(tokenid))
     return len(pipeline.execute())
 
 
